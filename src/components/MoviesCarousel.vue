@@ -6,13 +6,28 @@ const { posters, title } = defineProps(['posters', 'title']);
 
 <template>
   <v-container>
-    <v-row class="py-4 justify-between">
+    <div class="py-4 d-flex align-center justify-space-between">
       <div class="text-h4 text-md-h3 font-weight-bold">
         {{ title }}
       </div>
+      <!-- 
+      <v-btn
+        append-icon="mdi-chevron-right-circle-outline"
+        size="{2}"
+        variant="plain"
+        color="red"
+        class="me-2 text-none"
+        >SEE MORE</v-btn
+      > -->
 
-      <v-btn>SEE MORE</v-btn>
-    </v-row>
+      <v-btn
+        color="red"
+        append-icon="mdi-chevron-right-circle-outline"
+        variant="flat"
+      >
+        See More
+      </v-btn>
+    </div>
 
     <v-container
       class="movie-container || d-flex justify-center justify-md-start flex-wrap"
