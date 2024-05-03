@@ -18,6 +18,9 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme: 'dark',
   },
+  display: {
+    mobileBreakpoint: 'sm',
+  },
 });
 
 const app = createApp(App);

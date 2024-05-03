@@ -5,7 +5,11 @@ import { nsPosters, csPosters } from '@/utils/movieDetails';
 
 <template>
   <v-list class="cinemas-container">
-    <v-list-item v-for="poster in nsPosters" :key="poster.title">
+    <v-list-item
+      class="cinema-item"
+      v-for="poster in nsPosters"
+      :key="poster.title"
+    >
       <CinemaDetails
         :image="poster.url"
         cinema="CINEMA 1"
@@ -15,8 +19,18 @@ import { nsPosters, csPosters } from '@/utils/movieDetails';
   </v-list>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .cinemas-container {
-  padding: 0 120px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 600px) {
+    & {
+      max-width: 1280px;
+    }
+  }
+
+  .cinema-item {
+    background-color: #121212;
+  }
 }
 </style>
