@@ -7,8 +7,8 @@ import { nsPosters, csPosters } from '@/utils/movieDetails';
 <template>
   <main>
     <Hero />
-
     <MoviesCarousel :posters="nsPosters" title="NOW SHOWING" />
+    <MoviesCarousel :posters="csPosters" title="COMING SOON" />
   </main>
 </template>
 

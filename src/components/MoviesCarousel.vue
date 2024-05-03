@@ -10,20 +10,11 @@ const { posters, title } = defineProps(['posters', 'title']);
       <div class="text-h4 text-md-h3 font-weight-bold">
         {{ title }}
       </div>
-      <!-- 
-      <v-btn
-        append-icon="mdi-chevron-right-circle-outline"
-        size="{2}"
-        variant="plain"
-        color="red"
-        class="me-2 text-none"
-        >SEE MORE</v-btn
-      > -->
 
       <v-btn
         color="red"
         append-icon="mdi-chevron-right-circle-outline"
-        variant="flat"
+        variant="text"
       >
         See More
       </v-btn>
