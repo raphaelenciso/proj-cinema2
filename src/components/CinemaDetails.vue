@@ -25,10 +25,10 @@ const { image, cinema, title } = defineProps<CinemaDetailsProps>();
       <v-card-subtitle> Monday, 13 March 2023 </v-card-subtitle>
 
       <v-btn-toggle class="pt-4 ml-md-3" divided variant="outlined" color="red">
-        <v-btn :size="mobile ? 'x-small' : 'x-large'">12:30 PM</v-btn>
-        <v-btn :size="mobile ? 'x-small' : 'x-large'">12:30 PM</v-btn>
-        <v-btn :size="mobile ? 'x-small' : 'x-large'">12:30 PM</v-btn>
-        <v-btn :size="mobile ? 'x-small' : 'x-large'">12:30 PM</v-btn>
+        <v-btn :size="mobile ? 'x-small' : 'x-large'">10:30 AM</v-btn>
+        <v-btn :size="mobile ? 'x-small' : 'x-large'">1:00 PM</v-btn>
+        <v-btn :size="mobile ? 'x-small' : 'x-large'">4:30 PM</v-btn>
+        <v-btn :size="mobile ? 'x-small' : 'x-large'">7:00 PM</v-btn>
       </v-btn-toggle>
 
       <v-btn class="d-block mt-4 ml-3" color="red">BOOK NOW</v-btn>
