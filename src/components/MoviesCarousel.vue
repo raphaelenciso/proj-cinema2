@@ -1,13 +1,20 @@
-<script setup lang="ts">
-import { RouterLink } from 'vue-router';
+<script lang="ts" setup>
+import type { MovieDetailsType } from '@/utils/movieDetails';
+import { defineProps } from 'vue';
 
-const { posters, title } = defineProps(['posters', 'title']);
+interface MoviesCarouselProps {
+  posters: MovieDetailsType[];
+  title: string;
+  withHeader?: boolean;
+}
+
+const { posters, title, withHeader } = defineProps<MoviesCarouselProps>();
 </script>
 
 <template>
   <v-container>
     <div class="py-4 d-flex align-center justify-space-between">
-      <div class="text-h4 text-md-h3 font-weight-bold">
+      <div class="text-h4 text-md-h3 font-weight-bold" v-if="withHeader">
         {{ title }}
       </div>
 
@@ -15,6 +22,8 @@ const { posters, title } = defineProps(['posters', 'title']);
         color="red"
         append-icon="mdi-chevron-right-circle-outline"
         variant="text"
+        v-if="withHeader"
+        to="/movies"
       >
         See More
       </v-btn>
@@ -24,7 +33,7 @@ const { posters, title } = defineProps(['posters', 'title']);
       class="movie-container || d-flex justify-center justify-md-start flex-wrap"
     >
       <RouterLink
-        to="/test"
+        to="/"
         v-for="poster in posters"
         :key="poster.id"
         class="movie-item"

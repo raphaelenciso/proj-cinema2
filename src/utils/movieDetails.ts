@@ -64,6 +64,7 @@ export const csPosters = [
   },
   {
     id: 'eternals',
+    title: 'Eternals',
     url: 'https://m.media-amazon.com/images/M/MV5BY2Y1ODBhYTItYmJiZi00NjU2LWI2NjktNTcwM2U2NGQ2ZTNiXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
   },
 ];

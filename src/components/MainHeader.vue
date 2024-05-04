@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import { useDialogStore } from '@/stores/dialog';
 
 const route = useRoute();
 
@@ -24,6 +25,7 @@ const items: Items[] = [
     url: '/cinemas',
   },
 ];
+const dialog = useDialogStore();
 </script>
 
 <template>
@@ -52,10 +54,10 @@ const items: Items[] = [
       </v-toolbar-items>
 
       <v-btn
-        to="/login"
         variant="flat"
         color="red"
         class="ml-8 hidden-sm-and-down"
+        @click="dialog.loginDialogOpen()"
         >LOGIN</v-btn
       >
 
@@ -84,7 +86,13 @@ const items: Items[] = [
       ></v-list-item>
     </v-list>
 
-    <v-btn to="/login" variant="flat" color="red" class="ml-4">LOGIN</v-btn>
+    <v-btn
+      variant="flat"
+      color="red"
+      class="ml-4"
+      @click="dialog.loginDialogOpen()"
+      >LOGIN</v-btn
+    >
   </v-navigation-drawer>
 </template>
 

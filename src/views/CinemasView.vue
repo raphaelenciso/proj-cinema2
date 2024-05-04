@@ -22,15 +22,12 @@ import { nsPosters, csPosters } from '@/utils/movieDetails';
 <style lang="scss" scoped>
 .cinemas-container {
   margin: 0 auto;
+  background-color: #121212;
 
   @media screen and (min-width: 600px) {
     & {
       max-width: 1280px;
     }
-  }
-
-  .cinema-item {
-    background-color: #121212;
   }
 }
 </style>
