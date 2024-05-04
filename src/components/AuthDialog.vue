@@ -13,15 +13,10 @@ const { mobile } = useDisplay();
 <template>
   <v-dialog
     v-model="dialog.loginDialog"
-    width="auto"
     transition="dialog-bottom-transition"
+    max-width="450"
   >
-    <v-card
-      class="mx-auto pa-12 pb-8"
-      elevation="8"
-      :width="mobile ? 320 : 450"
-      rounded="md"
-    >
+    <v-card class="mx-auto pa-12 pb-8" elevation="8" rounded="md" width="100%">
       <v-tabs
         align-tabs="center"
         fixed-tabs
