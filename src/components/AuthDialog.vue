@@ -21,7 +21,7 @@ const { mobile } = useDisplay();
         align-tabs="center"
         fixed-tabs
         v-model="tab"
-        slider-color="red"
+        color="red"
         class="mb-4"
       >
         <v-tab value="si">Sign In</v-tab>

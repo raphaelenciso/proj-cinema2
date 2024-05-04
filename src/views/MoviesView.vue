@@ -13,11 +13,12 @@ const { mobile } = useDisplay();
   <div>
     <v-img src="/images/bg.jpg" height="200px" cover></v-img>
     <v-tabs
-      bg-color="red"
       align-tabs="center"
       fixed-tabs
       :height="mobile ? 50 : 70"
       v-model="tab"
+      width="500px"
+      color="red"
     >
       <v-tab value="ns">NOW SHOWING</v-tab>
       <v-tab value="cs">COMING SOON</v-tab>
