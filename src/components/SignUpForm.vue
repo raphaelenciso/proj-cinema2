@@ -62,12 +62,12 @@ const rules = {
     :type="showConfirmPassword ? 'text' : 'password'"
     density="compact"
     placeholder="Confirm your password"
-    prepend-inner-icon="mdi-lock-outline"
+    prepend-inner-icon="mdi-lock-check-outline"
     variant="outlined"
     @click:append-inner="showConfirmPassword = !showConfirmPassword"
   ></v-text-field>
 
-  <v-btn class="mb-8" color="primary" size="large" variant="tonal" block>
+  <v-btn class="mb-8" color="red" size="large" variant="tonal" block>
     Sign Up
   </v-btn>
 </template>

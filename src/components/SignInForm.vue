@@ -27,7 +27,7 @@ const rules = {
   >
     Password
     <a
-      class="text-caption text-decoration-none text-blue"
+      class="text-caption text-decoration-none text-red-darken-1"
       href="#"
       rel="noopener noreferrer"
       target="_blank"
@@ -46,7 +46,7 @@ const rules = {
     @click:append-inner="showPassword = !showPassword"
   ></v-text-field>
 
-  <v-btn class="mb-8" color="blue" size="large" variant="tonal" block>
+  <v-btn class="mb-8" color="red" size="large" variant="tonal" block>
     Sign In
   </v-btn>
 </template>

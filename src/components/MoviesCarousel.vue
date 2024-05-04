@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { MovieDetailsType } from '@/utils/movieDetails';
-import { defineProps } from 'vue';
 
 interface MoviesCarouselProps {
   posters: MovieDetailsType[];

@@ -1,5 +1,6 @@
 import './assets/main.css';
 import '@mdi/font/css/materialdesignicons.css';
+import colors from 'vuetify/util/colors';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
