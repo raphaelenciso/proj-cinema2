@@ -32,7 +32,7 @@ const { posters, title, withHeader } = defineProps<MoviesCarouselProps>();
       class="movie-container || d-flex justify-center justify-md-start flex-wrap"
     >
       <RouterLink
-        to="/"
+        to="/movies/1"
         v-for="poster in posters"
         :key="poster.id"
         class="movie-item"
