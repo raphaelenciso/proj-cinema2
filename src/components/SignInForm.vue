@@ -16,10 +16,6 @@ const rules = {
 };
 
 const v$ = useVuelidate(rules, state);
-
-const login = () => {
-  v$.$validate;
-};
 </script>
 
 <template>
@@ -30,7 +26,7 @@ const login = () => {
     prepend-inner-icon="mdi-email-outline"
     variant="outlined"
     v-model="state.email"
-    :error-messages="v$.email.$errors.map((e) => e.$message)"
+    :error-messages="v$.email.$errors.map((e: any) => e.$message)"
     label="Email"
     required
     @blur="v$.email.$touch"
@@ -60,7 +56,7 @@ const login = () => {
     :type="showPassword ? 'text' : 'password'"
     @click:append-inner="showPassword = !showPassword"
     v-model="state.password"
-    :error-messages="v$.password.$errors.map((e) => e.$message)"
+    :error-messages="v$.password.$errors.map((e:any) => e.$message)"
     label="Password"
     required
     @blur="v$.password.$touch"
@@ -68,7 +64,7 @@ const login = () => {
   ></v-text-field>
 
   <v-btn
-    @click="login"
+    @click="v$.validate"
     class="mb-8 mt-8"
     color="red"
     size="large"
