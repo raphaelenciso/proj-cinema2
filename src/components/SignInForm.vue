@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { reactive, ref } from 'vue';
 
-const email = ref('');
-const password = ref('');
+const state = reactive({
+  email: '',
+  password: '',
+});
+
 const showPassword = ref(false);
 
 const rules = {
-  required: (value: string) => !!value || 'Required.',
-  min: (v: string) => v.length >= 8 || 'Min 8 characters',
-  // passwordMatch: () =>
-  //   confirmPassword.value === password.value || 'Passwords does not match',
+  email: { required },
+  password: { required },
+};
+
+const v$ = useVuelidate(rules, state);
+
+const login = () => {
+  v$.$validate;
 };
 </script>
 
@@ -20,6 +29,12 @@ const rules = {
     placeholder="Email address"
     prepend-inner-icon="mdi-email-outline"
     variant="outlined"
+    v-model="state.email"
+    :error-messages="v$.email.$errors.map((e) => e.$message)"
+    label="Email"
+    required
+    @blur="v$.email.$touch"
+    @input="v$.email.$touch"
   ></v-text-field>
 
   <div
@@ -37,16 +52,29 @@ const rules = {
   </div>
 
   <v-text-field
-    :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-    :type="showPassword ? 'text' : 'password'"
     density="compact"
     placeholder="Enter your password"
     prepend-inner-icon="mdi-lock-outline"
+    :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
     variant="outlined"
+    :type="showPassword ? 'text' : 'password'"
     @click:append-inner="showPassword = !showPassword"
+    v-model="state.password"
+    :error-messages="v$.password.$errors.map((e) => e.$message)"
+    label="Password"
+    required
+    @blur="v$.password.$touch"
+    @input="v$.password.$touch"
   ></v-text-field>
 
-  <v-btn class="mb-8" color="red" size="large" variant="tonal" block>
+  <v-btn
+    @click="login"
+    class="mb-8 mt-8"
+    color="red"
+    size="large"
+    variant="tonal"
+    block
+  >
     Sign In
   </v-btn>
 </template>
