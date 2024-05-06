@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import type { MovieDetailsType } from '@/utils/movieDetails';
+import type { IMovie } from '@/types/movie.interface';
 
 interface MoviesCarouselProps {
-  posters: MovieDetailsType[];
-  title: string;
+  movies: IMovie[];
+  title?: string;
   withHeader?: boolean;
 }
 
-const { posters, title, withHeader } = defineProps<MoviesCarouselProps>();
+const { movies, title, withHeader } = defineProps<MoviesCarouselProps>();
 </script>
 
 <template>
@@ -33,13 +33,17 @@ const { posters, title, withHeader } = defineProps<MoviesCarouselProps>();
     >
       <RouterLink
         to="/movies/1"
-        v-for="poster in posters"
-        :key="poster.id"
+        v-for="movie in movies"
+        :key="movie.id"
         class="movie-item"
       >
-        <v-img cover :src="poster.url" class="mb-2" />
+        <v-img
+          cover
+          :src="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+          class="mb-2"
+        />
         <div class="movie-title || text-subtitle-1 text-center">
-          {{ poster.title }}
+          {{ movie.title }}
         </div>
       </RouterLink>
     </v-container>
