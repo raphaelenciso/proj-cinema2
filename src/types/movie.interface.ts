@@ -3,4 +3,10 @@ export interface IMovie {
   backdrop_path: string;
   title: string;
   poster_path: string;
+  runtime: number;
+  overview: string;
+  genres: {
+    id: number;
+    name: string;
+  }[];
 }

@@ -34,12 +34,12 @@ onMounted(() => {
   <main>
     <MainHero />
     <MoviesCarousel
-      :movies="nowShowingMovies?.slice(0, 5)"
+      :movies="nowShowingMovies?.slice(0, 8)"
       title="NOW SHOWING"
       with-header
     />
     <MoviesCarousel
-      :movies="comingSoonMovies?.slice(0, 5)"
+      :movies="comingSoonMovies?.slice(0, 8)"
       title="COMING SOON"
       with-header
     />

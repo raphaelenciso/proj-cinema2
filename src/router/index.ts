@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import CinemasView from '@/views/CinemasView.vue';
 import MoviesView from '@/views/MoviesView.vue';
 import MovieDetailsView from '@/views/MovieDetailsView.vue';
+import MovieSchedule from '@/components/MovieSchedule.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/cinemas',
       name: 'cinemas',
       component: CinemasView,
+    },
+    {
+      path: '/movie-schedule/:id',
+      name: 'movie-schedule',
+      component: MovieSchedule,
     },
     {
       path: '/movies',

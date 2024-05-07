@@ -1,9 +1,37 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useDisplay } from 'vuetify';
+import { useRoute } from 'vue-router';
+import type { IMovie } from '@/types/movie.interface';
+import SeatPlan from '@/components/SeatPlan.vue';
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const route = useRoute();
+const { mobile } = useDisplay();
 
 const date = ref('1');
-const { mobile } = useDisplay();
+const movieDetails = ref<IMovie | null>(null);
+
+const getMoveDetails = async () => {
+  try {
+    const res = await fetch(`${backendUrl}/api/movies/${route.params.id}`);
+    movieDetails.value = await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+onMounted(() => {
+  getMoveDetails();
+  console.log(movieDetails.value);
+});
+
+function formatTime(minutes: number) {
+  var hours = Math.floor(minutes / 60);
+  var mins = minutes % 60;
+  return hours + 'h ' + mins + 'min';
+}
 </script>
 
 <template>
@@ -32,18 +60,34 @@ const { mobile } = useDisplay();
 
     <v-card
       class="movie-details || d-flex flex-column flex-md-row align-center mt-4"
+      max-width="1300"
     >
       <v-img
-        src="https://m.media-amazon.com/images/M/MV5BMjMyOTM4MDMxNV5BMl5BanBnXkFtZTcwNjIyNzExOA@@._V1_.jpg"
+        :src="'https://image.tmdb.org/t/p/original' + movieDetails?.poster_path"
         :width="mobile ? 200 : 250"
       ></v-img>
       <div class="d-flex flex-column align-center align-md-start px-12">
         <div
           class="text-h4 text-md-h3 font-weight-bold pb-2 text-center text-md-left"
         >
-          The Amazing Spider-Man
+          {{ movieDetails?.title }}
         </div>
-        <div class="text-subtitle-1 text-md-h5 pb-6 text-grey">3h 10min PG</div>
+        <div class="text-subtitle-1 text-md-h5 text-grey">
+          {{ formatTime(movieDetails?.runtime!) }}
+        </div>
+        <div class="text-subtitle-1 py-3">
+          <span
+            v-for="(genre, index) in movieDetails?.genres"
+            :key="genre.id"
+            >{{
+              genre.name +
+              (index == movieDetails?.genres.length! - 1 ? ' ' : ', ')
+            }}</span
+          >
+        </div>
+        <div class="text-body-1 pb-6 text-grey">
+          {{ movieDetails?.overview }}
+        </div>
         <div class="text-subtitle-1 text-md-h5 pb-6">
           Time: <span>12:30PM</span>
         </div>
@@ -52,6 +96,8 @@ const { mobile } = useDisplay();
         >
       </div>
     </v-card>
+
+    <SeatPlan />
   </div>
 </template>
 
