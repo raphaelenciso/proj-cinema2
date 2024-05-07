@@ -86,14 +86,14 @@ onMounted(() => {
           }}
         </v-card-subtitle>
 
-        <div class="ml-4 mt-1">
+        <div class="ml-4">
           <v-btn
-            variant="outlined"
             color="red"
+            variant="outlined"
             :size="mobile ? 'small' : 'large'"
             v-for="showTime in showTimes"
             :key="showTime"
-            class="me-2"
+            class="me-2 mt-1"
             :to="`/movies/${route.params.id}?date=${
               date.monthName + '-' + date.monthDay + '-' + year
             }&time=${showTime}`"

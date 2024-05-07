@@ -13,7 +13,7 @@ const { movies, title, withHeader } = defineProps<MoviesCarouselProps>();
 <template>
   <v-container>
     <div class="py-4 d-flex align-center justify-space-between">
-      <div class="text-h4 text-md-h3 font-weight-bold" v-if="withHeader">
+      <div class="text-h5 text-md-h4 font-weight-bold" v-if="withHeader">
         {{ title }}
       </div>
 

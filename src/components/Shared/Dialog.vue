@@ -7,7 +7,7 @@
       title="Update in progress"
     >
       <template v-slot:actions>
-        <v-btn class="ms-auto" text="Ok" @click="confirm"></v-btn>
+        <v-btn class="ms-auto" text="Ok"></v-btn>
       </template>
     </v-card>
   </v-dialog>

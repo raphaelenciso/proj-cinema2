@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import type { IMovie } from '@/types/movie.interface';
 import StepperStep1 from '@/components/Movies/Movie/StepperStep1.vue';
 import StepperStep2 from '@/components/Movies/Movie/StepperStep2.vue';
@@ -9,6 +9,7 @@ import StepperStep3 from '@/components/Movies/Movie/StepperStep3.vue';
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const { params, query } = useRoute();
+const router = useRouter();
 
 const movieDetails = ref<IMovie | null>(null);
 const step = ref(1);
@@ -62,6 +63,11 @@ const setSelectedSeats = (seat: any) => {
 
       <template v-slot:item.3>
         <StepperStep3 :selectedSeats="selectedSeats" />
+      </template>
+
+      <template v-slot:next>
+        <v-btn @click="step++" v-if="step !== 3">Next</v-btn>
+        <v-btn @click="router.push('/')" v-else :disabled="false">Submit</v-btn>
       </template>
     </v-stepper>
   </div>

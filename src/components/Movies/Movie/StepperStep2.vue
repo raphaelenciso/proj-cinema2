@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import seats from '@/utils/seats';
 import { ref } from 'vue';
+import { useDisplay } from 'vuetify';
 
 const emit = defineEmits(['setSelectedSeats']);
-
+const { mobile } = useDisplay();
 const seatPlan = ref<any>(seats);
-
-const selectedSeats = ref<string[]>([]);
 
 const isSeatSelected = (rowIndex: number, seatIndex: number): boolean => {
   const seat = seatPlan.value[rowIndex][seatIndex];
@@ -29,13 +28,13 @@ const toggleSeat = (rowIndex: number, seatIndex: number): void => {
       <div
         v-for="(seat, seatIndex) in row"
         :key="seatIndex"
-        class="seat"
-        :class="{ aisle: seat === null }"
+        :class="`${mobile ? 'mx-0' : 'mx-1'} ${seat === null && 'aisle'}`"
       >
         <v-btn
           v-if="seat"
           :class="{ 'seat-selected': isSeatSelected(rowIndex, seatIndex) }"
           @click="toggleSeat(rowIndex, seatIndex)"
+          :size="mobile ? 'x-small' : 'default'"
         >
           {{ seat.name }}
         </v-btn>
@@ -50,9 +49,7 @@ const toggleSeat = (rowIndex: number, seatIndex: number): void => {
   justify-content: center;
   margin-bottom: 10px;
 }
-.seat {
-  margin: 5px;
-}
+
 .screen {
   text-align: center;
   font-weight: bold;
