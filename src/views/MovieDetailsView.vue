@@ -67,7 +67,7 @@ const setSelectedSeats = (seat: any) => {
 
       <template v-slot:next>
         <v-btn @click="step++" v-if="step !== 3">Next</v-btn>
-        <v-btn @click="router.push('/')" v-else :disabled="false">Submit</v-btn>
+        <v-btn @click="router.push('/')" v-else>Submit</v-btn>
       </template>
     </v-stepper>
   </div>
