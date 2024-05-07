@@ -14,10 +14,6 @@
 </template>
 
 <script setup lang="ts">
-const confirm = () => {
-  confirmation = false;
-};
-
 interface DialogProps {
   confirmation: boolean;
 }
