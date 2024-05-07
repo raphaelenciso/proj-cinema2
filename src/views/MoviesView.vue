@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { useDisplay } from 'vuetify';
-import MoviesCarousel from '@/components/MoviesCarousel.vue';
+import MoviesCarousel from '@/components/Shared/MoviesCarousel.vue';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 

@@ -9,4 +9,9 @@ export interface IMovie {
     id: number;
     name: string;
   }[];
+  dates: {
+    monthName: string;
+    monthDay: string;
+    dayName: string;
+  }[];
 }

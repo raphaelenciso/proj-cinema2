@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CinemaDetails from '@/components/CinemaDetails.vue';
-import { nsPosters, csPosters } from '@/utils/movieDetails';
+import CinemaDetails from '@/components/Cinemas/CinemaDetails.vue';
+import { nsPosters } from '@/utils/movieDetails';
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import Header from '@/components/MainHeader.vue';
-import AuthDialog from '@/components/AuthDialog.vue';
+import Header from '@/components/Shared/MainHeader.vue';
+import AuthDialog from '@/components/Auth/AuthDialog.vue';
 </script>
 
 <template>

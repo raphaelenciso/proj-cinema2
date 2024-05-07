@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import MainHero from '../components/MainHero.vue';
-import MoviesCarousel from '../components/MoviesCarousel.vue';
+import MainHero from '@/components/Home/MainHero.vue';
+import MoviesCarousel from '@/components/Shared/MoviesCarousel.vue';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const nowShowingMovies = ref([]);
 const comingSoonMovies = ref([]);
-
-console.log(backendUrl);
 
 const getMovies = async () => {
   try {
