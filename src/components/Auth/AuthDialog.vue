@@ -3,11 +3,16 @@ import { useDialogStore } from '@/stores/dialog';
 import { ref } from 'vue';
 import SignUpForm from './SignUpForm.vue';
 import SignInForm from './SignInForm.vue';
-import { useDisplay } from 'vuetify';
 
 const dialog = useDialogStore();
 const tab = ref('si');
-const { mobile } = useDisplay();
+const snackBarShow = ref(false);
+
+const switchTab = (newTab: string) => {
+  console.log(newTab);
+  tab.value = newTab;
+  snackBarShow.value = true;
+};
 </script>
 
 <template>
@@ -33,11 +38,21 @@ const { mobile } = useDisplay();
           <SignInForm />
         </v-tabs-window-item>
         <v-tabs-window-item value="su">
-          <SignUpForm />
+          <SignUpForm @switchTab="switchTab" />
         </v-tabs-window-item>
       </v-tabs-window>
     </v-card>
   </v-dialog>
+
+  <v-snackbar
+    v-model="snackBarShow"
+    :timeout="5000"
+    color="green"
+    elevation="24"
+    location="top right"
+  >
+    Sign up successful!
+  </v-snackbar>
 </template>
 
 <style scoped></style>

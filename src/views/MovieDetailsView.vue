@@ -40,8 +40,6 @@ const setSelectedSeats = (seat: any) => {
       selectedSeats.value.splice(index, 1);
     }
   }
-
-  console.log(selectedSeats.value);
 };
 </script>
 

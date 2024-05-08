@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const emit = defineEmits(['switchTab']);
+
+const formValid = ref(false);
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 const confirmPassword = ref('');
 const showConfirmPassword = ref(false);
+const errorMessage = ref('');
+const loading = ref(false);
 
 const generalRules = {
   required: (value: string) => !!value || 'Field is required',
@@ -17,8 +24,12 @@ const generalRules = {
 const usernameRules = [
   generalRules.required,
   (value: string) => {
-    if (value.length > 3) return true;
+    if (value.length >= 3) return true;
     return 'Username must be at least 3 characters';
+  },
+  (value: string) => {
+    if (value.length <= 15) return true;
+    return 'Username must be at most 15 characters';
   },
 ];
 
@@ -38,15 +49,60 @@ const passwordRules = [
     'Password must be at least 8 characters and have 1 digit',
 ];
 
-const confirmPasswordRules = [generalRules.passwordMatch];
+const confirmPasswordRules = [
+  generalRules.required,
+  generalRules.passwordMatch,
+];
 
-const signUp = () => {
-  console.log(username.value);
+const signUp = async () => {
+  if (!formValid.value) return;
+
+  errorMessage.value = '';
+  loading.value = true;
+
+  try {
+    const res = await fetch(`${backendUrl}/api/auth/sign-up`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username.value,
+        email: email.value,
+        password: password.value,
+      }),
+    });
+    const data = await res.json();
+
+    // if there is an error
+    if (!res.ok) {
+      loading.value = false;
+
+      if (data.code === 11000) {
+        if (data.keyPattern.username) {
+          errorMessage.value = 'username is taken';
+        } else if (data.keyPattern.email) {
+          errorMessage.value = 'email is already registered';
+        }
+      }
+      return console.log(data);
+    }
+
+    console.log(data);
+    username.value = '';
+    email.value = '';
+    password.value = '';
+    confirmPassword.value = '';
+    emit('switchTab', 'si');
+  } catch (error: any) {
+    console.log(error);
+  }
+  loading.value = false;
 };
 </script>
 
 <template>
-  <v-form @submit.prevent="signUp">
+  <v-form v-model="formValid" @submit.prevent="signUp">
     <div class="text-subtitle-1 text-medium-emphasis">Username</div>
     <v-text-field
       v-model="username"
@@ -101,6 +157,8 @@ const signUp = () => {
       :rules="confirmPasswordRules"
     ></v-text-field>
 
+    <div class="text-body-1 text-red">{{ errorMessage }}</div>
+
     <v-btn
       type="submit"
       class="mb-8 mt-8"
@@ -108,6 +166,8 @@ const signUp = () => {
       size="large"
       variant="tonal"
       block
+      :loading="loading"
+      :disabled="!formValid"
     >
       Sign Up
     </v-btn>
