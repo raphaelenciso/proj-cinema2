@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import Header from '@/components/Shared/MainHeader.vue';
 import AuthDialog from '@/components/Auth/AuthDialog.vue';
+import SnackBar from './components/Shared/SnackBar.vue';
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import AuthDialog from '@/components/Auth/AuthDialog.vue';
     </v-main>
 
     <AuthDialog />
+    <SnackBar />
   </v-app>
 </template>
 

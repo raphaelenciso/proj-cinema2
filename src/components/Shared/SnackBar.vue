@@ -1,16 +1,19 @@
 <template>
-  <v-snackbar v-model="show" :timeout="5000" color="green" elevation="24">
-    {{ message }}
+  <v-snackbar
+    v-model="snackbar.snackbar"
+    :timeout="3000"
+    color="green"
+    elevation="24"
+    location="top right"
+  >
+    {{ snackbar.message }}
   </v-snackbar>
 </template>
 
 <script setup lang="ts">
-interface SnackBarProps {
-  show: boolean;
-  message: string;
-}
+import { useSnackbarStore } from '@/stores/snackbar';
 
-const { show, message } = defineProps<SnackBarProps>();
+const snackbar = useSnackbarStore();
 </script>
 
 <style scoped></style>

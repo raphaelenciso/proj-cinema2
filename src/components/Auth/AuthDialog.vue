@@ -3,15 +3,16 @@ import { useDialogStore } from '@/stores/dialog';
 import { ref } from 'vue';
 import SignUpForm from './SignUpForm.vue';
 import SignInForm from './SignInForm.vue';
+import { useSnackbarStore } from '@/stores/snackbar';
 
 const dialog = useDialogStore();
+const snackbar = useSnackbarStore();
 const tab = ref('si');
-const snackBarShow = ref(false);
 
 const switchTab = (newTab: string) => {
   console.log(newTab);
   tab.value = newTab;
-  snackBarShow.value = true;
+  snackbar.show({message: 'Sign up successful!'});
 };
 </script>
 
@@ -43,16 +44,6 @@ const switchTab = (newTab: string) => {
       </v-tabs-window>
     </v-card>
   </v-dialog>
-
-  <v-snackbar
-    v-model="snackBarShow"
-    :timeout="5000"
-    color="green"
-    elevation="24"
-    location="top right"
-  >
-    Sign up successful!
-  </v-snackbar>
 </template>
 
 <style scoped></style>

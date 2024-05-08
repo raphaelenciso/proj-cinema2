@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useDialogStore } from '@/stores/dialog';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();
+const auth = useAuthStore();
 
 interface Items {
   title: string;
@@ -58,8 +60,34 @@ const dialog = useDialogStore();
         color="red"
         class="ml-8 hidden-sm-and-down"
         @click="dialog.loginDialogOpen()"
+        v-if="!auth.user"
         >LOGIN</v-btn
       >
+
+      <v-menu open-on-hover v-if="auth.user">
+        <template v-slot:activator="{ props }">
+          <v-col cols="auto">
+            <v-btn
+              icon="mdi-calendar"
+              variant="flat"
+              color="red"
+              size="small"
+              class="ml-8 hidden-sm-and-down"
+              v-bind="props"
+            >
+              {{ auth.user.username.slice(0, 1) }}
+            </v-btn>
+          </v-col>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-btn variant="text" size="large" @click="auth.logout()"
+              >Logout</v-btn
+            >
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
       <v-app-bar-nav-icon
         variant="text"

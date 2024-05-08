@@ -167,7 +167,6 @@ const signUp = async () => {
       variant="tonal"
       block
       :loading="loading"
-      :disabled="!formValid"
     >
       Sign Up
     </v-btn>

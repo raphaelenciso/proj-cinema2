@@ -5,11 +5,13 @@ import type { IMovie } from '@/types/movie.interface';
 import StepperStep1 from '@/components/Movies/Movie/StepperStep1.vue';
 import StepperStep2 from '@/components/Movies/Movie/StepperStep2.vue';
 import StepperStep3 from '@/components/Movies/Movie/StepperStep3.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const { params, query } = useRoute();
 const router = useRouter();
+const auth = useAuthStore();
 
 const movieDetails = ref<IMovie | null>(null);
 const step = ref(1);
@@ -41,6 +43,24 @@ const setSelectedSeats = (seat: any) => {
     }
   }
 };
+
+const bookSeats = () => {
+  console.log(auth.user!.id);
+  console.log(selectedSeats.value);
+  console.log(params.id);
+
+  // const res = await fetch(`${backendUrl}/api/auth/sign-up`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       username: username.value,
+  //       email: email.value,
+  //       password: password.value,
+  //     }),
+  //   });
+};
 </script>
 
 <template>
@@ -65,7 +85,7 @@ const setSelectedSeats = (seat: any) => {
 
       <template v-slot:next>
         <v-btn @click="step++" v-if="step !== 3">Next</v-btn>
-        <v-btn @click="router.push('/')" v-else>Submit</v-btn>
+        <v-btn @click="bookSeats" v-else :disabled="false">Submit</v-btn>
       </template>
     </v-stepper>
   </div>
