@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { useDisplay } from 'vuetify';
 
 const emit = defineEmits(['setSelectedSeats']);
+
 const { mobile } = useDisplay();
 const seatPlan = ref<any>(seats);
 

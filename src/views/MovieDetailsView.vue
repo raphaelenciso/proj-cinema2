@@ -1,20 +1,27 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, type LocationQueryValue } from 'vue-router';
 import type { IMovie } from '@/types/movie.interface';
 import StepperStep1 from '@/components/Movies/Movie/StepperStep1.vue';
 import StepperStep2 from '@/components/Movies/Movie/StepperStep2.vue';
 import StepperStep3 from '@/components/Movies/Movie/StepperStep3.vue';
 import { useAuthStore } from '@/stores/auth';
 
+import getMovieSession from '@/utils/movieSessions';
+import { useSnackbarStore } from '@/stores/snackbar';
+import seats from '@/utils/seats';
+
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const { params, query } = useRoute();
 const router = useRouter();
 const auth = useAuthStore();
+const snackbar = useSnackbarStore();
 
 const movieDetails = ref<IMovie | null>(null);
 const step = ref(1);
+const seatPlan = ref<any>(seats);
+
 const items = ['Movie Details', 'Select Seats', 'Confirm'];
 
 const getMoveDetails = async () => {
@@ -28,7 +35,6 @@ const getMoveDetails = async () => {
 
 onMounted(() => {
   getMoveDetails();
-  console.log(movieDetails.value);
 });
 
 const selectedSeats = ref<string[]>([]);
@@ -44,22 +50,35 @@ const setSelectedSeats = (seat: any) => {
   }
 };
 
-const bookSeats = () => {
-  console.log(auth.user!.id);
-  console.log(selectedSeats.value);
-  console.log(params.id);
+const bookSeats = async () => {
+  const formData = {
+    movieId: params.id,
+    seats: selectedSeats.value,
+    session: getMovieSession(query.time),
+    date: query.date,
+  };
 
-  // const res = await fetch(`${backendUrl}/api/auth/sign-up`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       username: username.value,
-  //       email: email.value,
-  //       password: password.value,
-  //     }),
-  //   });
+  try {
+    const res = await fetch(`${backendUrl}/api/movies/book`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+
+    // if there is an error
+    if (!res.ok) {
+      console.log(data);
+    }
+
+    snackbar.show({ message: 'Booked successfully!' });
+    selectedSeats.value = [];
+    router.push('/');
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
@@ -76,6 +95,7 @@ const bookSeats = () => {
         <StepperStep2
           :selectedSeats="selectedSeats"
           @setSelectedSeats="setSelectedSeats"
+          :seatPlan="seatPlan"
         />
       </template>
 
